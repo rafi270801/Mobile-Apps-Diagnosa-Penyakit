@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_diagnosa_penyakit/config/app_color.dart';
 import 'package:flutter_diagnosa_penyakit/view/diagnosa/diagnosa_page.dart';
 
+import '../../config/pref.dart';
+import '../../model/users.dart';
+import '../../viewmodel/authviewmodel.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -10,11 +14,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    getUserProfile();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.colorPrimaryBlue,
-      body: Padding(
+      body: _users == null ? const Center(child: CircularProgressIndicator(),) : Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
@@ -38,9 +49,9 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.grey, fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        "Rafi Muzaffar",
+                        "${_users?.name}",
                         style: fontTextStyle.copyWith(
-                            color: Color(0xFF4F4D4D),
+                            color: const Color(0xFF4F4D4D),
                             fontWeight: FontWeight.w800,
                             fontSize: 18),
                       ),
@@ -57,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             ),
             InkWell(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => DiagnosaPage(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const DiagnosaPage(),));
               },
               child: Container(
                 padding: const EdgeInsets.all(16),
@@ -102,5 +113,20 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Users? _users;
+  getUserProfile() async {
+    String? token = await Session().getUserToken();
+
+    if (token != null) {
+      AuthViewmodel().userDetail().then((value) {
+        if (value.code == 200) {
+          setState(() {
+            _users = Users.fromJson(value.data);
+          });
+        }
+      });
+    }
   }
 }
