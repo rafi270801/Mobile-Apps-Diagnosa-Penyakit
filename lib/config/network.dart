@@ -8,7 +8,7 @@ import 'network/interceptors/authorization_interceptor.dart';
 import 'network/interceptors/logger_interceptor.dart';
 
 // final baseUrl = dotenv.env['BASEURL_STAGING']!;
-const baseUrl = "https://961d-103-121-146-197.ngrok-free.app/";
+const baseUrl = "https://a604-103-121-146-197.ngrok-free.app/";
 // final baseUrl = dotenv.env['BASEURL_PRODUCTION']!;
 
 class Network {

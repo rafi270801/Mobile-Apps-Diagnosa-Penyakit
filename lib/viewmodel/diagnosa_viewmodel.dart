@@ -11,11 +11,16 @@ class DiagnosaViewmodel {
   Future<Resp> diagnosa({List<int>? symptomId}) async {
     // String? idUser = await Session().getUserId();
     // int userId = int.parse(idUser ?? "");
+    String? token = await Session().getUserToken();
+
     Map<String, dynamic> formdata = {
       "symptoms": symptomId,
     };
 
-    var resp = await Network.postApi(Endpoint.diagnosaUrl, formdata);
+    var header = <String, dynamic>{};
+    header[HttpHeaders.authorizationHeader] = 'Bearer $token';
+
+    var resp = await Network.postApiWithHeaders(Endpoint.diagnosaUrl, formdata, header);
     Resp data = Resp.fromJson(resp);
     return data;
   }

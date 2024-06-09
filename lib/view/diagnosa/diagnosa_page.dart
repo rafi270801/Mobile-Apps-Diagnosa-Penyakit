@@ -107,7 +107,7 @@ class _DiagnosaPageState extends State<DiagnosaPage> {
               activeColor: AppColor.colorPrimaryBlue,
               title: Text('Ya', style: fontTextStyle,),
               value: 'Ya',
-              groupValue: _selectedOption,
+              groupValue: selectedOptions[_listSymptoms[currentQuestionIndex].id],
               // onChanged: (value) {
               //   setState(() {
               //     _selectedOption = value!;
@@ -121,7 +121,7 @@ class _DiagnosaPageState extends State<DiagnosaPage> {
               activeColor: AppColor.colorPrimaryBlue,
               title: Text('Tidak', style: fontTextStyle,),
               value: 'Tidak',
-              groupValue: _selectedOption,
+              groupValue: selectedOptions[_listSymptoms[currentQuestionIndex].id],
               // onChanged: (value) {
               //   setState(() {
               //     _selectedOption = value!;
