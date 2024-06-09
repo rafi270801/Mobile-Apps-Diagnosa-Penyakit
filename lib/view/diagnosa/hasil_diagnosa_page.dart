@@ -1,8 +1,14 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_diagnosa_penyakit/config/app_color.dart';
+import 'package:flutter_diagnosa_penyakit/viewmodel/diagnosa_viewmodel.dart';
+
+import '../../model/diagnose.dart';
 
 class HasilDiagnosaPage extends StatefulWidget {
-  const HasilDiagnosaPage({super.key});
+  const HasilDiagnosaPage({super.key, required this.symptomsId });
+  final List<int> symptomsId;
 
   @override
   State<HasilDiagnosaPage> createState() => _HasilDiagnosaPageState();
@@ -19,7 +25,7 @@ class _HasilDiagnosaPageState extends State<HasilDiagnosaPage> {
           children: [
             SizedBox(height: MediaQuery.of(context).padding.top + 24),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: AppColor.white
@@ -77,5 +83,17 @@ class _HasilDiagnosaPageState extends State<HasilDiagnosaPage> {
         ),
       ),
     );
+  }
+
+  List<Diagnose> _listDiagnose = [];
+  postDiagnosa(){
+    DiagnosaViewmodel().diagnosa().then((value) {
+      if (value.code == 200) {
+        UnmodifiableListView listData = UnmodifiableListView(value.data);
+        setState(() {
+          _listDiagnose = listData.map((e) => Diagnose.fromJson(e)).toList();
+        });
+      }
+    });
   }
 }

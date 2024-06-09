@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../config/app_color.dart';
 import '../../config/pref.dart';
+import '../../model/users.dart';
 import '../../viewmodel/authviewmodel.dart';
 import '../../widget/custom_toast.dart';
 import '../base_page.dart';
@@ -14,6 +15,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    getUserProfile();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      body: Column(
+      body: _users == null ? const Center(child: CircularProgressIndicator(),) : Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
@@ -78,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Rafi Muzaffar",
+                        "${_users?.name ?? ""}",
                         style: fontTextStyle.copyWith(
                           fontSize: 16,
                           color: const Color(0xFF252A31),
@@ -88,13 +95,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         child: Text(
-                          "rafimuzaffar@gmail.com",
+                          "${_users?.email}",
                           style:
                           fontTextStyle.copyWith(color: const Color(0xFF4F5E71)),
                         ),
                       ),
                       Text(
-                        "08123456789",
+                        "${_users?.phone ?? ""}",
                         style:
                         fontTextStyle.copyWith(color: const Color(0xFF4F5E71)),
                       )
@@ -231,6 +238,21 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+  Users? _users;
+  getUserProfile() async {
+    String? token = await Session().getUserToken();
+
+    if (token != null) {
+      AuthViewmodel().userDetail().then((value) {
+        if (value.code == 200) {
+          setState(() {
+            _users = Users.fromJson(value.data);
+          });
+        }
+      });
+    }
   }
 
 }
