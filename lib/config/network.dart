@@ -8,7 +8,7 @@ import 'network/interceptors/authorization_interceptor.dart';
 import 'network/interceptors/logger_interceptor.dart';
 
 // final baseUrl = dotenv.env['BASEURL_STAGING']!;
-const baseUrl = "https://a604-103-121-146-197.ngrok-free.app/";
+const baseUrl = "https://reonaldi-saputro.website/";
 // final baseUrl = dotenv.env['BASEURL_PRODUCTION']!;
 
 class Network {
@@ -23,10 +23,15 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
-      Response rest = await dio.post(url, data: formData, options: Options(followRedirects: false, validateStatus: (status) => true,));
+          AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
+      Response rest = await dio.post(url,
+          data: formData,
+          options: Options(
+            followRedirects: false,
+            validateStatus: (status) => true,
+          ));
       debugPrint("$url response:${rest.data ?? ""}");
       dio.close();
       return rest.data;
@@ -56,9 +61,9 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response rest = await dio.post(url);
       debugPrint("$url response:${rest.data ?? ""}");
       dio.close();
@@ -78,7 +83,8 @@ class Network {
     }
   }
 
-  static Future<dynamic> postApiWithContentType(String url, dynamic formData) async {
+  static Future<dynamic> postApiWithContentType(
+      String url, dynamic formData) async {
     try {
       var dio = Dio(
         BaseOptions(
@@ -90,9 +96,9 @@ class Network {
           contentType: 'application/x-www-form-urlencoded',
         ),
       )..interceptors.addAll([
-        AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response rest = await dio.post(url, data: formData);
       debugPrint("$url response:${rest.data ?? ""}");
       dio.close();
@@ -124,11 +130,11 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue =
-      await dio.post(url, data: body, options: Options(headers: header));
+          await dio.post(url, data: body, options: Options(headers: header));
       debugPrint("$url response:${restValue.data ?? ""}");
       dio.close();
       header.clear();
@@ -160,11 +166,11 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue =
-      await dio.post(url, options: Options(headers: header));
+          await dio.post(url, options: Options(headers: header));
       debugPrint("$url response:${restValue.data ?? ""}");
       dio.close();
       header.clear();
@@ -198,9 +204,9 @@ class Network {
             headers: header,
             contentType: 'application/x-www-form-urlencoded'),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue = await dio.post(url,
           data: body,
           options: Options(contentType: Headers.formUrlEncodedContentType));
@@ -237,11 +243,11 @@ class Network {
           headers: header,
         ),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue =
-      await dio.post(url, data: body, options: Options(headers: header));
+          await dio.post(url, data: body, options: Options(headers: header));
       debugPrint("$url response:${restValue.data ?? ""}");
       dio.close();
       header.clear();
@@ -272,9 +278,9 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restGet = await dio.get(url);
       debugPrint("$url response:${restGet.data ?? ""}");
       dio.close();
@@ -306,9 +312,9 @@ class Network {
           maxRedirects: 1,
         ),
       )..interceptors.addAll([
-        AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restGet = await dio.get(url, options: Options(headers: header));
       debugPrint("$url response:${restGet.data ?? ""}");
       dio.close();
@@ -341,11 +347,11 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue =
-      await dio.put(url, data: body, options: Options(headers: header));
+          await dio.put(url, data: body, options: Options(headers: header));
       debugPrint("$url response:${restValue.data ?? ""}");
       dio.close();
       header.clear();
@@ -377,9 +383,9 @@ class Network {
             maxRedirects: 0,
             contentType: 'application/x-www-form-urlencoded'),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue = await dio.put(url,
           data: body,
           options: Options(
@@ -414,11 +420,11 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue =
-      await dio.put(url, options: Options(headers: header));
+          await dio.put(url, options: Options(headers: header));
       debugPrint("$url response:${restValue.data ?? ""}");
       dio.close();
       header.clear();
@@ -438,7 +444,8 @@ class Network {
     }
   }
 
-  static Future<dynamic> deleteApi(String url, Map<String, dynamic> header) async {
+  static Future<dynamic> deleteApi(
+      String url, Map<String, dynamic> header) async {
     try {
       var dio = Dio(
         BaseOptions(
@@ -449,11 +456,11 @@ class Network {
           maxRedirects: 0,
         ),
       )..interceptors.addAll([
-        // AuthorizationInterceptor(),
-        LoggerInterceptor(),
-      ]);
+          // AuthorizationInterceptor(),
+          LoggerInterceptor(),
+        ]);
       Response restValue =
-      await dio.delete(url, options: Options(headers: header));
+          await dio.delete(url, options: Options(headers: header));
       debugPrint("$url response:${restValue.data ?? ""}");
       dio.close();
       header.clear();
@@ -472,5 +479,4 @@ class Network {
       }
     }
   }
-
 }
