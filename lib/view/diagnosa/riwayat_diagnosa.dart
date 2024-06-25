@@ -51,7 +51,12 @@ class _RiwayatDiagnosaPageState extends State<RiwayatDiagnosaPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("${data.diseaseData?[0].name}", style: fontTextStyle.copyWith(color: AppColor.white, fontSize: 16, fontWeight: FontWeight.w600),),
+                Column(
+                  children: List.generate(data.diseaseData!.length, (index) {
+                    return Text("${data.diseaseData?[index].name}", style: fontTextStyle.copyWith(color: AppColor.white, fontSize: 16, fontWeight: FontWeight.w600),);
+
+                  }),
+                ),
                 Text("Tgl : $formattedDate", style: fontTextStyle.copyWith(color: AppColor.white, fontSize: 12),),
               ],
             ),
