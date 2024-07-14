@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_diagnosa_penyakit/view/auth/login_page.dart';
 import 'package:flutter_diagnosa_penyakit/view/base_page.dart';
+import 'package:flutter_diagnosa_penyakit/view/splash_screen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BasePage(),
+      home: SplashScreen(),
     );
   }
 }
