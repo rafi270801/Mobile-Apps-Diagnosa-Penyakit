@@ -44,150 +44,153 @@ class _HasilDiagnosaPageState extends State<HasilDiagnosaPage> {
             )
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  SizedBox(height: MediaQuery.of(context).padding.top + 46),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _diagnosa?.results?.length,
-                      itemBuilder: (context, index) {
-                        Result result = _diagnosa!.results![index];
-                        return Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: AppColor.white),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Hasil Diagnosis : ${result.disease?.name ?? ""} dengan persentase ${result.score}",
-                                  style: fontTextStyle.copyWith(
-                                      color: AppColor.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 16),
-                                ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  "${result.disease?.description ?? ""}",
-                                  style: fontTextStyle.copyWith(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).padding.top + 46),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _diagnosa?.results?.length,
+                        itemBuilder: (context, index) {
+                          Result result = _diagnosa!.results![index];
+                          return Container(
+                            margin: EdgeInsets.symmetric(vertical: 16),
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: AppColor.white),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Hasil Diagnosis : ${result.disease?.name ?? ""} dengan persentase ${result.score}",
+                                    style: fontTextStyle.copyWith(
+                                        color: AppColor.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    "${result.disease?.description ?? ""}",
+                                    style: fontTextStyle.copyWith(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w500),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      }),
-                  const SizedBox(height: 14),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GejalaSpesifikPage(
-                                      gejalaSpesifik: _diagnosa?.results?[0]
-                                          .disease
-                                          ?.additionSymptoms),
-                                ));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: AppColor.white,
-                                borderRadius: BorderRadius.circular(8)),
-                            width: double.infinity,
-                            height: 42,
-                            child: Center(
-                                child: Text(
-                              "Gejala Spesifik",
-                              style: fontTextStyle.copyWith(
-                                  color: AppColor.colorPrimaryBlue,
-                                  fontWeight: FontWeight.w600),
-                            )),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RiwayatDiagnosaPage(),
-                                ));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: AppColor.white,
-                                borderRadius: BorderRadius.circular(8)),
-                            width: double.infinity,
-                            height: 42,
-                            child: Center(
-                                child: Text(
-                              "Riwayat Diagnosa",
-                              style: fontTextStyle.copyWith(
-                                  color: AppColor.colorPrimaryBlue,
-                                  fontWeight: FontWeight.w600),
-                            )),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 36),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColor.white),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                          );
+                        }),
+                    const SizedBox(height: 14),
+                    Row(
                       children: [
-                        Center(
-                          child: Text(
-                            "Gejala yang dipilih",
-                            style: fontTextStyle.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16,
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GejalaSpesifikPage(
+                                        gejalaSpesifik: _diagnosa?.results?[0]
+                                            .disease
+                                            ?.additionSymptoms),
+                                  ));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: AppColor.white,
+                                  borderRadius: BorderRadius.circular(8)),
+                              width: double.infinity,
+                              height: 42,
+                              child: Center(
+                                  child: Text(
+                                "Gejala Spesifik",
+                                style: fontTextStyle.copyWith(
+                                    color: AppColor.colorPrimaryBlue,
+                                    fontWeight: FontWeight.w600),
+                              )),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: _diagnosa?.symptoms?.length,
-                          itemBuilder: (context, index) {
-                            Symptoms? gejala = _diagnosa?.symptoms?[index];
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${gejala?.name ?? ""}",
-                                  style: fontTextStyle.copyWith(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  width: double.infinity,
-                                  color: Colors.grey[600],
-                                  height: 1,
-                                ),
-                              ],
-                            );
-                          },
-                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RiwayatDiagnosaPage(),
+                                  ));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: AppColor.white,
+                                  borderRadius: BorderRadius.circular(8)),
+                              width: double.infinity,
+                              height: 42,
+                              child: Center(
+                                  child: Text(
+                                "Riwayat Diagnosa",
+                                style: fontTextStyle.copyWith(
+                                    color: AppColor.colorPrimaryBlue,
+                                    fontWeight: FontWeight.w600),
+                              )),
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 36),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColor.white),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Text(
+                              "Gejala yang dipilih",
+                              style: fontTextStyle.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _diagnosa?.symptoms?.length,
+                            itemBuilder: (context, index) {
+                              Symptoms? gejala = _diagnosa?.symptoms?[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${gejala?.name ?? ""}",
+                                    style: fontTextStyle.copyWith(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Container(
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 10),
+                                    width: double.infinity,
+                                    color: Colors.grey[600],
+                                    height: 1,
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
       bottomNavigationBar: Container(
